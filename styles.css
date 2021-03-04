@@ -1,0 +1,53 @@
+body {
+    background: url("./assets/background.jpg") no-repeat center fixed;
+    background-color:white;
+    background-size: 40%;
+    
+}
+* {
+    font-family: Helvetica Black Oblique;
+    font-weight: 900;
+    font-stretch: semi-condensed;
+}
+    
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#cardWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /* padding-top: 5%; */
+   
+}
+
+#playerWrapper {
+    background-color: black;
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 300px;
+    height:600px;
+    border-radius: 5px;
+}
+
+#computerWrapper {
+    background-color: black;
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 300px;
+    height: 600px;
+    border-radius: 5px;
+}
+#message { 
+    padding-left: 40%;
+}
