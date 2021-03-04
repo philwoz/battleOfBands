@@ -1,9 +1,22 @@
 body {
-    background: url("./assets/background.jpg") no-repeat center fixed;
+    background: url("./assets/background.jpg")  center fixed;
     background-color:white;
-    background-size: 40%;
+    
     
 }
+
+header {
+    background-color: aliceblue;;
+    color: black;
+}
+/* #title {
+    background-color: black;
+    color: aliceblue;
+    border-radius: 5px;
+    border-color: black;
+    border-width: 5px;
+} */
+
 * {
     font-family: Helvetica Black Oblique;
     font-weight: 900;
@@ -21,7 +34,7 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    /* padding-top: 5%; */
+    padding-top: 5%;
    
 }
 

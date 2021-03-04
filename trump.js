@@ -32,33 +32,7 @@ const bandArray = [["Oasis", "oasis.jpg", 10, 9, 10, 10, 10],
 let playerCards = []
 let computerCard = []
 let topCards = []
-// card counts
-const playerCount = document.getElementById("numOfCardsP")
-const computerCount = document.getElementById("numOfCardsC")
-//card attributes
-const playerBand = document.getElementById("nameP")
-const computerBand = document.getElementById("nameC")
-const playerImg = document.getElementById("imgP")
-const computerImg = document.getElementById("imgC")
-const playerAlbums = document.getElementById("albumTxtP")
-const computerAlbums = document.getElementById("albumTxtC")
-const playerSingles = document.getElementById("singleTxtP")
-const computerSingle = document.getElementById("singleTxtC")
-const playerLive = document.getElementById("liveTxtP")
-const computerLive = document.getElementById("liveTxtC")
-const playerFame = document.getElementById("fameTxtP")
-const computerFame = document.getElementById("fameTxtC")
-const playerAwards = document.getElementById("awardsTxtP")
-const computerAwards = document.getElementById("awardsTxtC")
-// buttons
-const startGame = document.getElementById("startGame")
-const nextCard = document.getElementById(id="nextCardButton")
-const showCardP = document.getElementById(id="showCardButtonP")
-const showCardC = document.getElementById(id="showCardButtonC")
-// message
-const message = document.getElementById(id="message")
-
-
+let chosenStat = ""
 
 
 class Band {
@@ -157,7 +131,7 @@ const dealCards = (anArray) => {
 
 }
 
-const getTopCards = (aArray1, aArray2) => {
+const getTopCards = () => {
     let playerTop = playerCards.shift()
     let computerTop = computerCard.shift()
 
@@ -199,7 +173,7 @@ const compareStats = (sArray) => {
         Array.prototype.push.apply(computerCard, topCards)
         topCards = []
         return "Computer"
-    } else {
+    } else if (sArray[0] === sArray[1]) {
         playerCards.push(topCards[0])
         computerCard.push(topCards[1])
         topCards = []
@@ -207,29 +181,111 @@ const compareStats = (sArray) => {
     }
 }
 
+const setCardCounts = () => {
+    playerCount.innerHTML = `Player Card Count: ${playerCards.length}`
+    computerCount.innerHTML = `Computers CardCount: ${computerCard.length}`
+}
+
+const setCardsInnerHtml = (p) => {
+    //players stats
+    playerBand.innerHTML = p.bandName
+    playerImg.src = `./assets/${p.bandImage}`
+    playerAlbums.innerHTML = `Albums Score: ${p.bandAlbums}`
+    playerSingles.innerHTML = `Singles Score: ${p.bandSingles}`
+    playerLive.innerHTML = `Live Score: ${p.bandLive}`
+    playerFame.innerHTML = `Fame Score: ${p.bandFame}`
+    playerAwards.innerHTML = `Awards Score: ${p.bandAwards}`
+
+    // computer stats
+    computerBand.innerHTML = ""
+    computerImg.src = ""
+    computerAlbums.innerHTML = ""
+    computerSingles.innerHTML = ""
+    computerLive.innerHTML = ""
+    computerFame.innerHTML = ""
+    computerAwards.innerHTML = ""
+
+}
+
+
+const showComputerCard = (c) => {
+    computerBand.innerHTML = c.bandName
+    computerImg.src = `./assets/${c.bandImage}`
+    computerAlbums.innerHTML = `Albums Score: ${c.bandAlbums}`
+    computerSingles.innerHTML = `Singles Score: ${c.bandSingles}`
+    computerLive.innerHTML = `Live Score: ${c.bandLive}`
+    computerFame.innerHTML = `Fame Score: ${c.bandFame}`
+    computerAwards.innerHTML = `Awards Score: ${c.bandAwards}`
+}
 
 
 
 
+//d.o.m
+
+// card counts
+const playerCount = document.getElementById("numOfCardsP")
+const computerCount = document.getElementById("numOfCardsC")
+//card attributes
+const playerBand = document.getElementById("nameP")
+const computerBand = document.getElementById("nameC")
+const playerImg = document.getElementById("imgP")
+const computerImg = document.getElementById("imgC")
+const playerAlbums = document.getElementById("albumTxtP")
+const computerAlbums = document.getElementById("albumTxtC")
+const playerSingles = document.getElementById("singleTxtP")
+const computerSingles = document.getElementById("singleTxtC")
+const playerLive = document.getElementById("liveTxtP")
+const computerLive = document.getElementById("liveTxtC")
+const playerFame = document.getElementById("fameTxtP")
+const computerFame = document.getElementById("fameTxtC")
+const playerAwards = document.getElementById("awardsTxtP")
+const computerAwards = document.getElementById("awardsTxtC")
+// buttons
+const startGame = document.getElementById(id="startGame")
+const nextCard = document.getElementById(id="nextCardButton")
+const statChoice = document.getElementById(id="chooseStat")
+const showCardC = document.getElementById(id="showCardButtonC")
+// message
+const message = document.getElementById(id="message")
 
 
+startGame.addEventListener("click", () => {
+    let a = getRandonArray()
+   
+    dealCards(a)
+    getTopCards()
+    
+    let p = topCards[0]
+    console.log(topCards[1])
+    
+    // setcount
+    setCardCounts()
+    setCardsInnerHtml(p)
+    startGame.innerHTML = "Restart Game"
+    message.innerHTML = "Choose which stat to play!"
+    showCardC.style.display = ""
+    
+
+})
+
+showCardC.addEventListener("click", () => {
+    let c = topCards[1]
+    showComputerCard(c)
+    let s = chooseStat(topCards, chosenStat)
+    console.log(s)
+    let w = compareStats(s)
+    message.innerHTML = `<br>The winner of that round is ${w}!</br>
+    press new card!`
+    setCardCounts()
+
+    
+})
+
+statChoice.addEventListener("click", () => {
+    chosenStat = prompt("please choose a stat to play!")
+    message.innerHTML = `<br>You chose ${chosenStat}!</br>
+    Now show computers card to compare!`
+})
 
 
-// let aArray = getRandonArray()
-// let one = aArray[0]
-// let two =aArray[1]
-let a = getRandonArray()
-dealCards(a)
-console.log(playerCards[0].bandName)
-console.log(computerCard[0].bandName)
-getTopCards(playerCards, computerCard)
-console.log(playerCards.length)
-console.log(topCards[1].bandName)
-let b = chooseStat(topCards, "fame")
-
-console.log(compareStats(b))
-// console.log(playerCards.length)
-// console.log (computerCard[14])
-console.log(topCards)
-
-// console.log(two)
