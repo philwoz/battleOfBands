@@ -257,7 +257,7 @@ startGame.addEventListener("click", () => {
     getTopCards()
     
     let p = topCards[0]
-    console.log(topCards[1])
+   
     
     // setcount
     setCardCounts()
@@ -276,7 +276,7 @@ showCardC.addEventListener("click", () => {
     console.log(s)
     let w = compareStats(s)
     message.innerHTML = `<br>The winner of that round is ${w}!</br>
-    press new card!`
+    press next card!`
     setCardCounts()
 
     
@@ -286,6 +286,25 @@ statChoice.addEventListener("click", () => {
     chosenStat = prompt("please choose a stat to play!")
     message.innerHTML = `<br>You chose ${chosenStat}!</br>
     Now show computers card to compare!`
+})
+
+
+nextCard.addEventListener("click", () => {
+    if(playerCards === 0){
+        message.innerHTML = `<br>Player one has no more cards!</br>
+        <br>The computer has won the game!</br>
+        Press restart game to play again!`
+    } else if (computerCard === 0){
+        message.innerHTML = `<br>Computer has no more cards!</br>
+        <br>You has won the game!</br>
+        Press restart game to play again!`
+    }
+    getTopCards()
+    let p = topCards[0]
+    setCardCounts()
+    setCardsInnerHtml(p)
+    message.innerHTML = "Choose which stat to play!"
+    showCardC.style.display = ""
 })
 
 
