@@ -33,6 +33,7 @@ let playerCards = []
 let computerCard = []
 let topCards = []
 let chosenStat = ""
+let currentPlayer = 1
 
 
 class Band {
@@ -162,6 +163,37 @@ const chooseStat = (objectArray, stat) => {
 
 }
 
+const computersChoice = (objectArray) => {
+    let object = objectArray[1]
+    let c = [object.bandAlbums, object.bandSingles, object.bandLive, object.bandFame, object.bandAwards]
+    let d = c.reduce(function(a,b) {
+        return Math.max(a,b)
+      })
+
+      console.log(`c= ${c}....d= ${d}  index = ${c.indexOf(d)}`)
+
+      switch(c.indexOf(d)){
+        case 0:
+            return "albums";
+            break;
+        case 1:
+            return "singles";
+            break;
+        case 2:
+            return "live";
+            break;
+        case  3:
+            return "fame";
+            break;
+        case 4:
+            return "awards";
+            break;
+        
+      }
+
+
+}
+
 const compareStats = (sArray) => {
 
     if (sArray[0] > sArray[1]) {
@@ -186,7 +218,7 @@ const setCardCounts = () => {
     computerCount.innerHTML = `Computers CardCount: ${computerCard.length}`
 }
 
-const setCardsInnerHtml = (p) => {
+const setCardsInnerHtmlP = (p) => {
     //players stats
     playerBand.innerHTML = p.bandName
     playerImg.src = `./assets/${p.bandImage}`
@@ -196,19 +228,12 @@ const setCardsInnerHtml = (p) => {
     playerFame.innerHTML = `Fame Score: ${p.bandFame}`
     playerAwards.innerHTML = `Awards Score: ${p.bandAwards}`
 
-    // computer stats
-    computerBand.innerHTML = ""
-    computerImg.src = ""
-    computerAlbums.innerHTML = ""
-    computerSingles.innerHTML = ""
-    computerLive.innerHTML = ""
-    computerFame.innerHTML = ""
-    computerAwards.innerHTML = ""
+  
 
 }
 
-
-const showComputerCard = (c) => {
+const setCardsInnerHtmlC = (c) => {
+    //players stats
     computerBand.innerHTML = c.bandName
     computerImg.src = `./assets/${c.bandImage}`
     computerAlbums.innerHTML = `Albums Score: ${c.bandAlbums}`
@@ -216,6 +241,32 @@ const showComputerCard = (c) => {
     computerLive.innerHTML = `Live Score: ${c.bandLive}`
     computerFame.innerHTML = `Fame Score: ${c.bandFame}`
     computerAwards.innerHTML = `Awards Score: ${c.bandAwards}`
+
+
+
+}
+
+
+
+const hideCardP = () => {
+    playerBand.innerHTML = ""
+    playerImg.src = ""
+    playerAlbums.innerHTML = ""
+    playerSingles.innerHTML = ""
+    playerLive.innerHTML = ""
+    playerFame.innerHTML = ""
+    playerAwards.innerHTML = ""
+}
+
+const hideCardC = () => {
+  // computer stats
+  computerBand.innerHTML = ""
+  computerImg.src = ""
+  computerAlbums.innerHTML = ""
+  computerSingles.innerHTML = ""
+  computerLive.innerHTML = ""
+  computerFame.innerHTML = ""
+  computerAwards.innerHTML = ""
 }
 
 
@@ -245,23 +296,30 @@ const computerAwards = document.getElementById("awardsTxtC")
 const startGame = document.getElementById(id="startGame")
 const nextCard = document.getElementById(id="nextCardButton")
 const statChoice = document.getElementById(id="chooseStat")
+
 const showCardC = document.getElementById(id="showCardButtonC")
 // message
 const message = document.getElementById(id="message")
 
 
 startGame.addEventListener("click", () => {
+    // playerCards = []
+    // computerCard = []
+    
     let a = getRandonArray()
    
     dealCards(a)
+    
+    setCardCounts()
     getTopCards()
     
     let p = topCards[0]
    
     
     // setcount
-    setCardCounts()
-    setCardsInnerHtml(p)
+    // setCardCounts()
+    setCardsInnerHtmlP(p)
+    hideCardC()
     startGame.innerHTML = "Restart Game"
     message.innerHTML = "Choose which stat to play!"
     showCardC.style.display = ""
@@ -271,7 +329,9 @@ startGame.addEventListener("click", () => {
 
 showCardC.addEventListener("click", () => {
     let c = topCards[1]
-    showComputerCard(c)
+    let p = topCards[0]
+    setCardsInnerHtmlP(p)
+    setCardsInnerHtmlC(c)
     let s = chooseStat(topCards, chosenStat)
     console.log(s)
     let w = compareStats(s)
@@ -283,13 +343,21 @@ showCardC.addEventListener("click", () => {
 })
 
 statChoice.addEventListener("click", () => {
+    if(currentPlayer == 1){
     chosenStat = prompt("please choose a stat to play!")
     message.innerHTML = `<br>You chose ${chosenStat}!</br>
     Now show computers card to compare!`
+    } else if (currentPlayer == 2) {
+        chosenStat = computersChoice(topCards)
+        message.innerHTML = `<br>Computer chose ${chosenStat}!</br>
+        Now show your card to compare!`
+        console.log(chosenStat)
+    }
 })
 
 
 nextCard.addEventListener("click", () => {
+    console.log(currentPlayer)
     if(playerCards === 0){
         message.innerHTML = `<br>Player one has no more cards!</br>
         <br>The computer has won the game!</br>
@@ -299,12 +367,27 @@ nextCard.addEventListener("click", () => {
         <br>You has won the game!</br>
         Press restart game to play again!`
     }
+
     getTopCards()
+    if(currentPlayer == 2){
+    
     let p = topCards[0]
     setCardCounts()
-    setCardsInnerHtml(p)
+    setCardsInnerHtmlP(p)
+    hideCardC()
     message.innerHTML = "Choose which stat to play!"
     showCardC.style.display = ""
+    currentPlayer = 1
+    } else if (currentPlayer == 1){
+        let c = topCards[1]
+        setCardCounts()
+        setCardsInnerHtmlC(c)
+        hideCardP()
+        message.innerHTML = "Computer choice of which stat to play!"
+        currentPlayer = 2
+
+    }
+    console.log(currentPlayer)
 })
 
 
