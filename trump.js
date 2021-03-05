@@ -303,14 +303,14 @@ const message = document.getElementById(id="message")
 
 
 startGame.addEventListener("click", () => {
-    // playerCards = []
-    // computerCard = []
-    
+    playerCards = []
+    computerCard = []
+    currentPlayer = 1
     let a = getRandonArray()
    
     dealCards(a)
-    
     setCardCounts()
+    
     getTopCards()
     
     let p = topCards[0]

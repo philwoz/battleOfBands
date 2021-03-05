@@ -10,9 +10,9 @@ body {
 }
 
 * {
-    font-family: Helvetica Black Oblique;
+    font-family:Arial, Helvetica, sans-serif;
     font-weight: 900;
-    font-stretch: semi-condensed;
+    font-stretch: extra-condensed;
 }
     
 
