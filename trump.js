@@ -342,16 +342,14 @@ showCardC.addEventListener("click", () => {
     
 })
 
-statChoice.addEventListener("click", () => {
+statChoice.addEventListener("change", () => {
     if(currentPlayer == 1){
-    chosenStat = prompt("please choose a stat to play!")
+    chosenStat = statChoice.value
     message.innerHTML = `<br>You chose ${chosenStat}!</br>
     Now show computers card to compare!`
     } else if (currentPlayer == 2) {
-        chosenStat = computersChoice(topCards)
-        message.innerHTML = `<br>Computer chose ${chosenStat}!</br>
-        Now show your card to compare!`
-        console.log(chosenStat)
+        
+        
     }
 })
 
@@ -384,6 +382,13 @@ nextCard.addEventListener("click", () => {
         setCardsInnerHtmlC(c)
         hideCardP()
         message.innerHTML = "Computer choice of which stat to play!"
+setTimeout(function(){
+    chosenStat = computersChoice(topCards)
+        message.innerHTML = `<br>Computer chose ${chosenStat}!</br>
+        Now show your card to compare!`
+}, 5000)
+
+        
         currentPlayer = 2
 
     }

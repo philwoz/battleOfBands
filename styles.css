@@ -14,6 +14,20 @@ body {
     font-weight: 900;
     font-stretch: extra-condensed;
 }
+#buttonWrapper {
+    display: flex;
+    flex-direction: column;
+}
+#starbuttons {
+    display: flex;
+    flex-direction: row;
+}
+
+#select {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
     
 
 header {

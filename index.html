@@ -9,26 +9,22 @@
 </head>
 <body>
     <header>
-        <div >
-            <h3 id="numOfCardsP">Player Card Count: 15</h3>
-        </div>
+        
     <div>
         <h1 id="title">Battle of the 90's Bands</h1>
     </div>
-    <div >
-        <h3 id="numOfCardsC">Computers Card Count: 15</h3>
-    </div>
+    
 </header>
 <div id="messageWrapper">
-<div>
-    <button id="chooseStat">Choose a stat</button>
+    <div >
+        <h3 id="numOfCardsP">Player Card Count: 15</h3>
     </div>
 <div>
     <h2 id="message">Start New Game!</h2>
 </div>
 <div >
-    <button id="showCardButtonC">Show Card</button>
-    </div>
+    <h3 id="numOfCardsC">Computers Card Count: 15</h3>
+</div>
 </div>
 
    
@@ -69,7 +65,8 @@
        
         
     </div>
-
+<div id="buttonWrapper">
+    <div id="starbuttons">
     <div id="startButton">
         <button id="startGame">Start Game</button>
         </div>
@@ -77,7 +74,24 @@
         <div >
             <button id="nextCardButton">Next Card</button>
             </div>
-
+        </div>
+        <div id = "select">
+            <div>
+                <!-- <lable id="stats">Choose a stat</label> -->
+                    <select name="stats" id="chooseStat">
+                        <option value="choose">STATS</option>
+                        <option value="albums">albums</option>
+                        <option value="singles">singles</option>
+                        <option value="live">live</option>
+                        <option value="fame">fame</option>
+                        <option value="awards">awards</option>
+                    </select>
+                </div>
+                <div >
+                    <button id="showCardButtonC">Show Card</button>
+                    </div>
+                </div>
+            </div>
     <div id="computerWrapper">
         <div>
             <h1 id="Computer">Computer</h1>
