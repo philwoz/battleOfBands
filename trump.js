@@ -364,7 +364,7 @@ nextCard.addEventListener("click", () => {
         message.innerHTML = `<br>Computer has no more cards!</br>
         <br>You has won the game!</br>
         Press restart game to play again!`
-    }
+    }else{
 
     getTopCards()
     if(currentPlayer == 2){
@@ -392,6 +392,7 @@ setTimeout(function(){
         currentPlayer = 2
 
     }
+}
     console.log(currentPlayer)
 })
 
