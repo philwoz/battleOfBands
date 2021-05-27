@@ -166,13 +166,13 @@ const chooseStat = (objectArray, stat) => {
 const computersChoice = (objectArray) => {
     let object = objectArray[1]
     let c = [object.bandAlbums, object.bandSingles, object.bandLive, object.bandFame, object.bandAwards]
-    let d = c.reduce(function(a,b) {
-        return Math.max(a,b)
-      })
+    let d = c.reduce(function (a, b) {
+        return Math.max(a, b)
+    })
 
-      console.log(`c= ${c}....d= ${d}  index = ${c.indexOf(d)}`)
+    console.log(`c= ${c}....d= ${d}  index = ${c.indexOf(d)}`)
 
-      switch(c.indexOf(d)){
+    switch (c.indexOf(d)) {
         case 0:
             return "albums";
             break;
@@ -182,14 +182,14 @@ const computersChoice = (objectArray) => {
         case 2:
             return "live";
             break;
-        case  3:
+        case 3:
             return "fame";
             break;
         case 4:
             return "awards";
             break;
-        
-      }
+
+    }
 
 
 }
@@ -228,7 +228,7 @@ const setCardsInnerHtmlP = (p) => {
     playerFame.innerHTML = `Fame Score: ${p.bandFame}`
     playerAwards.innerHTML = `Awards Score: ${p.bandAwards}`
 
-  
+
 
 }
 
@@ -259,14 +259,14 @@ const hideCardP = () => {
 }
 
 const hideCardC = () => {
-  // computer stats
-  computerBand.innerHTML = ""
-  computerImg.src = ""
-  computerAlbums.innerHTML = ""
-  computerSingles.innerHTML = ""
-  computerLive.innerHTML = ""
-  computerFame.innerHTML = ""
-  computerAwards.innerHTML = ""
+    // computer stats
+    computerBand.innerHTML = ""
+    computerImg.src = ""
+    computerAlbums.innerHTML = ""
+    computerSingles.innerHTML = ""
+    computerLive.innerHTML = ""
+    computerFame.innerHTML = ""
+    computerAwards.innerHTML = ""
 }
 
 
@@ -293,13 +293,13 @@ const computerFame = document.getElementById("fameTxtC")
 const playerAwards = document.getElementById("awardsTxtP")
 const computerAwards = document.getElementById("awardsTxtC")
 // buttons
-const startGame = document.getElementById(id="startGame")
-const nextCard = document.getElementById(id="nextCardButton")
-const statChoice = document.getElementById(id="chooseStat")
+const startGame = document.getElementById(id = "startGame")
+const nextCard = document.getElementById(id = "nextCardButton")
+const statChoice = document.getElementById(id = "chooseStat")
 
-const showCardC = document.getElementById(id="showCardButtonC")
+const showCardC = document.getElementById(id = "showCardButtonC")
 // message
-const message = document.getElementById(id="message")
+const message = document.getElementById(id = "message")
 
 
 startGame.addEventListener("click", () => {
@@ -307,15 +307,15 @@ startGame.addEventListener("click", () => {
     computerCard = []
     currentPlayer = 1
     let a = getRandonArray()
-   
+
     dealCards(a)
     setCardCounts()
-    
+
     getTopCards()
-    
+
     let p = topCards[0]
-   
-    
+
+
     // setcount
     // setCardCounts()
     setCardsInnerHtmlP(p)
@@ -323,7 +323,7 @@ startGame.addEventListener("click", () => {
     startGame.innerHTML = "Restart Game"
     message.innerHTML = "Choose which stat to play!"
     showCardC.style.display = ""
-    
+
 
 })
 
@@ -339,60 +339,60 @@ showCardC.addEventListener("click", () => {
     press next card!`
     setCardCounts()
 
-    
+
 })
 
 statChoice.addEventListener("change", () => {
-    if(currentPlayer == 1){
-    chosenStat = statChoice.value
-    message.innerHTML = `<br>You chose ${chosenStat}!</br>
+    if (currentPlayer == 1) {
+        chosenStat = statChoice.value
+        message.innerHTML = `<br>You chose ${chosenStat}!</br>
     Now show computers card to compare!`
     } else if (currentPlayer == 2) {
-        
-        
+
+
     }
 })
 
 
 nextCard.addEventListener("click", () => {
     console.log(currentPlayer)
-    if(playerCards === 0){
+    if (playerCards === 0) {
         message.innerHTML = `<br>Player one has no more cards!</br>
         <br>The computer has won the game!</br>
         Press restart game to play again!`
-    } else if (computerCard === 0){
+    } else if (computerCard === 0) {
         message.innerHTML = `<br>Computer has no more cards!</br>
         <br>You has won the game!</br>
         Press restart game to play again!`
-    }else{
+    } else {
 
-    getTopCards()
-    if(currentPlayer == 2){
-    
-    let p = topCards[0]
-    setCardCounts()
-    setCardsInnerHtmlP(p)
-    hideCardC()
-    message.innerHTML = "Choose which stat to play!"
-    showCardC.style.display = ""
-    currentPlayer = 1
-    } else if (currentPlayer == 1){
-        let c = topCards[1]
-        setCardCounts()
-        setCardsInnerHtmlC(c)
-        hideCardP()
-        message.innerHTML = "Computer choice of which stat to play!"
-setTimeout(function(){
-    chosenStat = computersChoice(topCards)
-        message.innerHTML = `<br>Computer chose ${chosenStat}!</br>
+        getTopCards()
+        if (currentPlayer == 2) {
+
+            let p = topCards[0]
+            setCardCounts()
+            setCardsInnerHtmlP(p)
+            hideCardC()
+            message.innerHTML = "Choose which stat to play!"
+            showCardC.style.display = ""
+            currentPlayer = 1
+        } else if (currentPlayer == 1) {
+            let c = topCards[1]
+            setCardCounts()
+            setCardsInnerHtmlC(c)
+            hideCardP()
+            message.innerHTML = "Computer choice of which stat to play!"
+            setTimeout(function () {
+                chosenStat = computersChoice(topCards)
+                message.innerHTML = `<br>Computer chose ${chosenStat}!</br>
         Now show your card to compare!`
-}, 5000)
+            }, 5000)
 
-        
-        currentPlayer = 2
 
+            currentPlayer = 2
+
+        }
     }
-}
     console.log(currentPlayer)
 })
 
